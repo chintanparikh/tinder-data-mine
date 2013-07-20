@@ -8,7 +8,7 @@ $(document).ready(function() {
       if (token && id) {
         console.log("Facebook token: " + token);
         console.log("Facebook ID: " + id);
-        authTinder();
+        auth(token);
         $('.auth').remove();
       } else {
         console.log('User cancelled login or did not fully authorize.');
@@ -16,3 +16,15 @@ $(document).ready(function() {
     }, {});
   });
 });
+
+function auth(token)
+{
+	$.ajax({
+		type: "POST",
+		url: "https://api.tinder.com/auth",
+		data: {"facebook_token": token},
+		success: function(response) {
+			console.log(response);
+		}
+	})
+}
